@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/bankrApp/static/css/main.073c9b0a.css",
+    "main.js": "/bankrApp/static/js/main.e30ae3e5.js",
+    "static/js/787.f329ae34.chunk.js": "/bankrApp/static/js/787.f329ae34.chunk.js",
+    "static/media/logo.svg": "/bankrApp/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/bankrApp/index.html",
+    "main.073c9b0a.css.map": "/bankrApp/static/css/main.073c9b0a.css.map",
+    "main.e30ae3e5.js.map": "/bankrApp/static/js/main.e30ae3e5.js.map",
+    "787.f329ae34.chunk.js.map": "/bankrApp/static/js/787.f329ae34.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.073c9b0a.css",
+    "static/js/main.e30ae3e5.js"
+  ]
+}
