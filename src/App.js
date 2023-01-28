@@ -1,25 +1,52 @@
-import logo from './logo.svg';
-import './App.css';
+import {useState} from 'react'
+import Header from './components/Header'
+import Button from './components/Button'
 
 function App() {
+  const [inputValue, setInputValue] = useState('')
+  const [balA, setbalA] = useState(0)
+
+  const deposit = () => {
+    setbalA(balA + +inputValue)
+  }
+
+  const withdraw = () => {
+    setbalA(balA - +inputValue)
+  }
+
+  const onInputChange = (e) => {
+    setInputValue(e.target.value)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <Header />
+      <div>
+        <h3>Balance: {balA}</h3>
+      </div>
+      <div>
+        <input type="text" value={inputValue} onChange={onInputChange}></input>
+      </div>
+      <div>
+        <Button 
+        color='green' 
+        text='Gimme $' 
+        onClick={deposit} />
+        <Button 
+        color='maroon' 
+        text='Steal $' 
+        onClick={withdraw} />
+      </div>
     </div>
   );
 }
+
+// const App = () => {
+//   return (
+//     <div className="container">
+//       <Header />
+//     </div>
+//   )
+// }
 
 export default App;
