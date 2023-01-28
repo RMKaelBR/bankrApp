@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/bankrApp/static/css/main.31cd00b7.css",
-    "main.js": "/bankrApp/static/js/main.13600a95.js",
-    "static/js/787.f329ae34.chunk.js": "/bankrApp/static/js/787.f329ae34.chunk.js",
-    "index.html": "/bankrApp/index.html",
-    "main.31cd00b7.css.map": "/bankrApp/static/css/main.31cd00b7.css.map",
-    "main.13600a95.js.map": "/bankrApp/static/js/main.13600a95.js.map",
-    "787.f329ae34.chunk.js.map": "/bankrApp/static/js/787.f329ae34.chunk.js.map"
+    "main.css": "/bankrapp/static/css/main.31cd00b7.css",
+    "main.js": "/bankrapp/static/js/main.dd27ac8c.js",
+    "static/js/787.f329ae34.chunk.js": "/bankrapp/static/js/787.f329ae34.chunk.js",
+    "index.html": "/bankrapp/index.html",
+    "main.31cd00b7.css.map": "/bankrapp/static/css/main.31cd00b7.css.map",
+    "main.dd27ac8c.js.map": "/bankrapp/static/js/main.dd27ac8c.js.map",
+    "787.f329ae34.chunk.js.map": "/bankrapp/static/js/787.f329ae34.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.31cd00b7.css",
-    "static/js/main.13600a95.js"
+    "static/js/main.dd27ac8c.js"
   ]
 }
