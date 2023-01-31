@@ -4,14 +4,25 @@ import Button from './components/Button'
 
 function App() {
   const [inputValue, setInputValue] = useState('')
-  const [balA, setbalA] = useState(0)
+  const [balA, setbalA] = useState(8000)
+  const [balB, setbalB] = useState(15000)
 
   const deposit = () => {
-    setbalA(balA + +inputValue)
+    if (balB >= inputValue)
+    {
+      setbalA(balA + +inputValue)
+      setbalB(balB - +inputValue)
+    }
+    
   }
 
   const withdraw = () => {
-    setbalA(balA - +inputValue)
+    if (balA >= inputValue)
+    {
+      setbalA(balA - +inputValue)
+      setbalB(balB + +inputValue)
+    }
+    
   }
 
   const onInputChange = (e) => {
@@ -22,7 +33,7 @@ function App() {
     <div className="container">
       <Header />
       <div>
-        <h3>Balance: {balA}</h3>
+        <h3>Account A Balance: {balA}</h3>
       </div>
       <div>
         <input type="text" value={inputValue} onChange={onInputChange}></input>
@@ -37,7 +48,11 @@ function App() {
         text='Steal $' 
         onClick={withdraw} />
       </div>
+      <div>
+        <h3>Account B Balance: {balB}</h3>
+      </div>
     </div>
+    
   );
 }
 
