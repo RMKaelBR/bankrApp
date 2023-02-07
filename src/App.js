@@ -2,72 +2,83 @@ import {useState} from 'react'
 import Header from './components/Header'
 import Button from './components/Button'
 import User from './components/User'
+import User2 from './components/User2'
+import Expenses from './components/Expenses'
 
-let activeAccountIndex = 0
+let activeAccountIndex1 = null
+let activeAccountIndex2 = null
 
 function App() {
   const [inputValue, setInputValue] = useState('')
-  const [users, setUser] = useState([
+  
+  const [users] = useState([
     {
       userId: 1,
       userName: "Kutsinta",
-      accountBalance: 24000
+      accountBalance: 24000,
+      expenses: []
     },
     {
       userId: 2,
       userName: "Chibby",
-      accountBalance: 1500
+      accountBalance: 1500,
+      expenses: []
     },
     {
       userId: 3,
       userName: "BrotherBintoy",
-      accountBalance: 700
+      accountBalance: 700,
+      expenses: []
     },
     {
       userId: 4,
       userName: "Micromaggot",
-      accountBalance: 50000
+      accountBalance: 50000,
+      expenses: []
     },
     {
       userId: 5,
       userName: "Megamaggot",
-      accountBalance: 3000
+      accountBalance: 3000,
+      expenses: []
     },
     {
       userId: 6,
       userName: "Psykomaggot",
-      accountBalance: 300000
+      accountBalance: 300000,
+      expenses: []
     }
   ])
-
-  const [balA, setbalA] = useState('')
-  const [balB, setbalB] = useState(15000)
-
   
+  const [balA, setbalA] = useState('')
+  const [balB, setbalB] = useState('')
 
   //Deposit
   const deposit = () => {
-    if (balB >= inputValue)
-    {
-      users[activeAccountIndex].accountBalance += +inputValue
-      setbalA(users[activeAccountIndex].accountBalance)
-      setbalB(balB - +inputValue)
-      setInputValue('')
-      console.log(`eh ${activeAccountIndex}`)
-    }
+    users[activeAccountIndex1].accountBalance += +inputValue
+    setbalA(users[activeAccountIndex1].accountBalance)
+    setInputValue('')
   }
 
   //Withdraw
   const withdraw = () => {
+    users[activeAccountIndex1].accountBalance -= +inputValue
+    setbalA(users[activeAccountIndex1].accountBalance)
+    setInputValue('')
+  }
+
+  //Send Money
+  const sendMoney = () => {
     if (balA >= inputValue)
     {
-      users[activeAccountIndex].accountBalance -= +inputValue
-      setbalA(users[activeAccountIndex].accountBalance)
-      setbalB(balB + +inputValue)
+      users[activeAccountIndex1].accountBalance -= +inputValue
+      users[activeAccountIndex2].accountBalance += +inputValue
+      setbalA(users[activeAccountIndex1].accountBalance)
+      setbalB(users[activeAccountIndex2].accountBalance)
       setInputValue('')
-      console.log(`eh ${activeAccountIndex}`)
     }
   }
+
 
   const onInputChange = (e) => {
     setInputValue(e.target.value)
@@ -75,57 +86,79 @@ function App() {
   }
 
   const activeUserChange = (e) => {
-    console.log(`User changed to ${e.target.value}.`)
+    console.log(`Active User changed to ${e.target.value}.`)
     for(let user of users)
     {
       if (user.userName === e.target.value) {
-        activeAccountIndex = user.userId - 1
-        console.log(activeAccountIndex)
+        activeAccountIndex1 = user.userId - 1
         setbalA(user.accountBalance)
-        // setbalA(users[activeAccountIndex].accountBalance)
+        // setbalA(users[activeAccountIndex1].accountBalance)
         break
       }
       else
         setbalA('')
     }
+  }
 
+  const activeUserChange2 = (e) => {
+    console.log(`Active User2 changed to ${e.target.value}.`)
+    for(let user of users)
+    {
+      if (user.userName === e.target.value) {
+        activeAccountIndex2 = user.userId - 1
+        setbalB(user.accountBalance)
+        // setbalA(users[activeAccountIndex1].accountBalance)
+        break
+      }
+      else
+        setbalB('')
+    }
   }
 
   return (
-    <div className="container">
-      <Header />
-      <div className="containerTwo">
-        <div>
-          <User userArray={users} 
-            onActiveUserChange={activeUserChange} />
+    <>
+      <div className="container">
+        <Header />
+        <div className="containerTwo">
           <div>
-            <h3>Account A Balance: {balA}</h3>
+            <User userArray={users} 
+              onActiveUserChange={activeUserChange} />
+            <div>
+              <h3>Balance: {balA}</h3>
+            </div>
+            <div>
+              <input type="text" value={inputValue} 
+              onChange={onInputChange}></input>
+            </div>
+            <div>
+              <Button 
+              color='green' 
+              text='Gimme $' 
+              onClick={deposit} />
+              <Button 
+              color='orange' 
+              text='Lose $' 
+              onClick={withdraw} />
+              <Button 
+              color='maroon' 
+              text='Alms $' 
+              onClick={sendMoney} />
+            </div>
           </div>
+          
           <div>
-            <input type="text" value={inputValue} 
-            onChange={onInputChange}></input>
+            <User2 userArray={users} 
+              onActiveUserChange={activeUserChange2} 
+              activeUser1={activeAccountIndex1}/>
+            <h3>Balance: {balB}</h3>
           </div>
-          <div>
-            <Button 
-            color='green' 
-            text='Gimme $' 
-            onClick={deposit} />
-            <Button 
-            color='orange' 
-            text='Lose $' 
-            onClick={withdraw} />
-            <Button 
-            color='maroon' 
-            text='Alms $' 
-            onClick={withdraw} />
-          </div>
-        </div>
-        
-        <div>
-          <h3>Account B Balance: {balB}</h3>
         </div>
       </div>
-    </div>
+      <div className="container">
+        <Header title="Expenses" style={{border: "1px solid red"}}/>
+      </div>
+    </>
+    
     
   );
 }
